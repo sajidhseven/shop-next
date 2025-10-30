@@ -28,7 +28,8 @@
 {
   "scripts": {
     "build": "next build",
-    "postinstall": "prisma generate --schema=./prisma/schema.prisma"
+    "postinstall": "prisma generate --schema=./sample/my-next-app/prisma/schema.prisma"
+
   }
 }
 
