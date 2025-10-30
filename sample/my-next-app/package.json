@@ -24,3 +24,11 @@
     "eslint-config-next": "16.0.0"
   }
 }
+
+{
+  "scripts": {
+    "build": "next build",
+    "postinstall": "prisma generate --schema=./prisma/schema.prisma"
+  }
+}
+
