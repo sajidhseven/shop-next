@@ -13,6 +13,8 @@ model User {
   role         String   @default("CUSTOMER")
   passwordHash String
   // (no "name" in the version Prisma actually generated)
+  // Back-relation to CartItem (required!)
+  cartItems    CartItem[]
 }
 
 
