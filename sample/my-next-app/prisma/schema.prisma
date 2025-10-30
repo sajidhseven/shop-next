@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  role         String   @default("CUSTOMER")
+  passwordHash String
+  // (no "name" in the version Prisma actually generated)
+}
+
+
+model Product {
+  id        String      @id @default(cuid())
+  name      String
+  price     Int
+  image     String
+  createdAt DateTime    @default(now())
+
+  // RELATIONS
+  cartItems CartItem[]  // Product has many CartItem
+}
+
+model CartItem {
+  id        String   @id @default(cuid())
+
+  // RELATION: many CartItem -> one User
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int      // must match User.id which is Int
+
+  // RELATION: many CartItem -> one Product
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String
+
+  qty       Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+}
