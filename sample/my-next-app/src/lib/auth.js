@@ -57,3 +57,7 @@ export async function getUserFromCookie() {
     return null;
   }
 }
+
+// existing exports...
+export { getUserFromCookie as getCurrentUser };
+
